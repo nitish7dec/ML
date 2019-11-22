@@ -1,0 +1,126 @@
+require(plyr)
+require(dplyr)
+require(stringdist)
+require(data.table)
+require(mefa)
+
+
+
+check_list<-read.csv("D:\\NITISH\\Remote_Access_data_companylisting\\Combined_data.csv")
+
+check_list <- data.table("CUSTOMER_NAME"=check_list$COMPANY_NAME,
+                         "CATEGORY" = check_list$CATEGORY,
+                         "MAPPING" = check_list$MAPPING
+)
+
+INDUSIND <- read.csv("D:\\NITISH\\Remote_Access_data_companylisting\\INDUSIND.csv")
+
+PL_INDUSIND <- data.table("INDUSIND_NAME"=INDUSIND$COMPANY_NAME,
+                      "INDUSIND_CAT" = INDUSIND$CATEGORY,
+                      "INDUSIND_MAPPING_PL" = INDUSIND$MAPPING)
+
+KOTAK <- read.csv("D:\\NITISH\\Remote_Access_data_companylisting\\KOTAK.csv")
+
+PL_KOTAK <- data.table("KOTAK_NAME"=KOTAK$COMPANY_NAME,
+                          "KOTAK_CAT" = KOTAK$CATEGORY,
+                          "KOTAK_MAPPING_PL" = KOTAK$MAPPING)
+
+HDFC <- read.csv("D:\\NITISH\\Remote_Access_data_companylisting\\HDFC.csv")
+
+PL_HDFC <- data.table("HDFC_NAME"=HDFC$COMPANY_NAME,
+                      "HDFC_CAT" = HDFC$CATEGORY,
+                      "HDFC_MAPPING_PL" = HDFC$MAPPING)
+
+HDB <- read.csv("D:\\NITISH\\Remote_Access_data_companylisting\\HDB.csv")
+
+PL_HDB <- data.table("HDB_NAME"=HDB$COMPANY_NAME,
+                      "HDB_CAT" = HDB$CATEGORY,
+                      "HDB_MAPPING_PL" = HDB$MAPPING)
+
+
+
+
+
+
+check_list$MAPPING <- as.character(check_list$MAPPING)
+PL_HDB$HDB_MAPPING_PL <- as.character(PL_HDB$HDB_MAPPING_PL)
+PL_HDFC$HDFC_MAPPING_PL <- as.character(PL_HDFC$HDFC_MAPPING_PL)
+
+system.time({
+  
+  n <- nrow(check_list)
+  cc <- data.table(CUSTOMER_NAME = check_list[c(1:n), .(CUSTOMER_NAME)],
+                   
+                   
+                   INDUSIND_NAME = rep("a", n),
+                   INDUSIND_MATCH = rep(1.0, n),
+                   INDUSIND_CAT = rep("a", n),
+                   
+                   
+                   
+                   KOTAK_NAME = rep("a", n),
+                   KOTAK_MATCH = rep(1.0, n),
+                   KOTAK_CAT = rep("a", n),
+                   
+                   HDFC_NAME = rep("a", n),
+                   HDFC_MATCH = rep(1.0, n),
+                   HDFC_CAT = rep("a", n),
+            
+                   HDB_NAME = rep("a", n),
+                   HDB_MATCH = rep(1.0, n),
+                   HDB_CAT = rep("a", n),
+                   
+
+                                      
+                   
+                   
+                   
+                                
+                   
+                   stringsAsFactors = FALSE)
+  
+  check_JW <- function(dat)
+  {
+    
+    dt1 <- data.table(rep(dat, nrow(PL_INDUSIND)), PL_INDUSIND)[, INDUSIND_MATCH := 1-stringdist(MAPPING, INDUSIND_MAPPING_PL, method="jw", p=0.10)][,.(INDUSIND_NAME, INDUSIND_MATCH, INDUSIND_CAT)]
+    
+    
+    dt2 <- data.table(rep(dat, nrow(PL_KOTAK)), PL_KOTAK)[, KOTAK_MATCH := 1-stringdist(MAPPING, KOTAK_MAPPING_PL, method="jw", p=0.10)][,.(KOTAK_NAME, KOTAK_MATCH, KOTAK_CAT)]
+    
+    dt3 <- data.table(rep(dat, nrow(PL_HDFC)), PL_HDFC)[, HDFC_MATCH := 1-stringdist(MAPPING, HDFC_MAPPING_PL, method="jw", p=0.10)][,.(HDFC_NAME, HDFC_MATCH, HDFC_CAT)]
+   
+    dt11<- data.table(rep(dat, nrow(PL_HDB)), PL_HDB)[, HDB_MATCH := 1-stringdist(MAPPING, HDB_MAPPING_PL, method="jw", p=0.10)][,.(HDB_NAME, HDB_MATCH, HDB_CAT)]
+    
+    
+    
+    
+    
+    c1 <- dt1[dt1[ , .I[which.max(INDUSIND_MATCH)]]]
+    
+    
+    c2 <- dt2[dt2[ , .I[which.max(KOTAK_MATCH)]]]
+
+    c3 <- dt3[dt3[ , .I[which.max(HDFC_MATCH)]]]
+
+    c11 <- dt11[dt11[ , .I[which.max(HDB_MATCH)]]]
+
+    
+    
+    
+    dt <- data.table(c1,c2,c3,c11)
+    return(dt)
+  }
+  
+  for (i in c(1:n))
+  {
+    cc[i,] <- data.table(check_list[i, CUSTOMER_NAME], check_JW(check_list[i,]))
+    # if(i%%1000 == 0) print(i)
+    print(i)
+  }
+  
+})
+
+#write.csv(cc,'D:\\NITISH\\sortedfile1.csv',append = FALSE)
+
+
+
