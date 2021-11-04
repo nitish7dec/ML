@@ -32,34 +32,11 @@
 				}
 			},
 			{
-				"name": "Filter filename",
-				"type": "Filter",
-				"dependsOn": [
-					{
-						"activity": "Get Metadata",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"items": {
-						"value": "@activity('Get Metadata').output.childItems",
-						"type": "Expression"
-					},
-					"condition": {
-						"value": "@startswith(item().name,'Sales')",
-						"type": "Expression"
-					}
-				}
-			},
-			{
 				"name": "Forloop runs on each file",
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Filter filename",
+						"activity": "Get Metadata",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -121,7 +98,10 @@
 							"inputs": [
 								{
 									"referenceName": "loopanddumptonewlocation",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"FileName": "@item().name"
+									}
 								}
 							],
 							"outputs": [
