@@ -16,12 +16,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "Getmetadata",
+						"referenceName": "fetchmetadata",
 						"type": "DatasetReference"
 					},
-					"fieldList": [
-						"childItems"
-					],
+					"fieldList": [],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
 						"enablePartitionDiscovery": false
@@ -68,7 +66,8 @@
 									"storeSettings": {
 										"type": "AzureBlobStorageReadSettings",
 										"recursive": true,
-										"enablePartitionDiscovery": false
+										"enablePartitionDiscovery": false,
+										"prefix": "Sales"
 									},
 									"formatSettings": {
 										"type": "DelimitedTextReadSettings"
@@ -82,7 +81,7 @@
 									"formatSettings": {
 										"type": "DelimitedTextWriteSettings",
 										"quoteAllText": true,
-										"fileExtension": ".txt"
+										"fileExtension": ".csv"
 									}
 								},
 								"enableStaging": false,
@@ -97,16 +96,7 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "loopanddumptonewlocation",
-									"type": "DatasetReference",
-									"parameters": {
-										"FileName": "@item().name"
-									}
-								}
-							],
-							"outputs": [
-								{
-									"referenceName": "Finalfilestonewrg",
+									"referenceName": "copyactivitystage1",
 									"type": "DatasetReference",
 									"parameters": {
 										"FileName": {
@@ -114,6 +104,12 @@
 											"type": "Expression"
 										}
 									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "Finaloutput",
+									"type": "DatasetReference"
 								}
 							]
 						}
