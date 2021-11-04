@@ -15,16 +15,13 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataset": {
-						"referenceName": "getfilename",
-						"type": "DatasetReference"
-					},
 					"fieldList": [
 						"childItems",
 						"lastModified"
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -110,7 +107,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "Final_file_meta_data",
+									"referenceName": "sinkdataset",
 									"type": "DatasetReference"
 								}
 							]
