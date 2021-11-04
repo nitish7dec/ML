@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "Finalfile",
-				"folderPath": "Final"
+				"container": "nitishpractise"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
