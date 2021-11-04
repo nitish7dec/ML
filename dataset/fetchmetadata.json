@@ -2,7 +2,7 @@
 	"name": "fetchmetadata",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "linked service 1",
+			"referenceName": "Bloblinkedservice",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,7 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"container": "practise"
+				"folderPath": "Data",
+				"container": "myfolder"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
