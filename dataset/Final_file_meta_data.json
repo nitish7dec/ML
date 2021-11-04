@@ -1,0 +1,22 @@
+{
+	"name": "Final_file_meta_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedservice2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Finalfile",
+				"folderPath": "Final"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
