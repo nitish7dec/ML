@@ -2,7 +2,7 @@
 	"name": "getlatestfile",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Bloblinkedservice",
+			"referenceName": "nitishlinkedservice",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
