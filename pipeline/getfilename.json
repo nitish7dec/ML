@@ -99,13 +99,7 @@
 							"inputs": [
 								{
 									"referenceName": "copyactivitystage1",
-									"type": "DatasetReference",
-									"parameters": {
-										"FileName": {
-											"value": "@activity('Filer file name').output.name",
-											"type": "Expression"
-										}
-									}
+									"type": "DatasetReference"
 								}
 							],
 							"outputs": [
