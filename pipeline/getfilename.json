@@ -19,7 +19,9 @@
 						"referenceName": "fetchmetadata",
 						"type": "DatasetReference"
 					},
-					"fieldList": [],
+					"fieldList": [
+						"childItems"
+					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
 						"enablePartitionDiscovery": false
