@@ -57,9 +57,20 @@
 			{
 				"name": "Forloop runs on each file",
 				"type": "ForEach",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Filter filename",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
+					"items": {
+						"value": "@activity('Filter filename').output.name",
+						"type": "Expression"
+					},
 					"isSequential": true,
 					"activities": [
 						{
