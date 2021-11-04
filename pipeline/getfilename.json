@@ -100,7 +100,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@greater(formatDateTime(activity('getlatestfilename').output.lastModified,'yyyyMMddHHmmss'),formatDateTime(variables('PreviousModifiedDate'),'yyyyMMddHHmmss'))",
+									"value": "@greater(formatDateTime(activity('getlatestfilename').output.lastModified,'yyyyMMddHHmmss'),formatDateTime(variables('previousmodifieddate'),'yyyyMMddHHmmss'))",
 									"type": "Expression"
 								},
 								"ifTrueActivities": [
