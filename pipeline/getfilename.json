@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "get filename",
+				"name": "Get Metadata",
 				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
@@ -15,13 +15,15 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"dataset": {
+						"referenceName": "fetchmetadata",
+						"type": "DatasetReference"
+					},
 					"fieldList": [
-						"childItems",
-						"lastModified"
+						"childItems"
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
-						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -30,11 +32,11 @@
 				}
 			},
 			{
-				"name": "ForEach1",
+				"name": "Forloop runs on each file",
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "get filename",
+						"activity": "Get Metadata",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -43,13 +45,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('get filename').output.childItems",
+						"value": "@activity('Get Metadata').output.childItems",
 						"type": "Expression"
 					},
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Copy data1",
+							"name": "copy loop data to new location",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -80,7 +82,7 @@
 									"formatSettings": {
 										"type": "DelimitedTextWriteSettings",
 										"quoteAllText": true,
-										"fileExtension": ".txt"
+										"fileExtension": ".csv"
 									}
 								},
 								"enableStaging": false,
@@ -95,7 +97,7 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "combineddataset",
+									"referenceName": "copyactivitystage1",
 									"type": "DatasetReference",
 									"parameters": {
 										"FileName": {
@@ -107,7 +109,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "sinkdataset",
+									"referenceName": "Finaloutput",
 									"type": "DatasetReference"
 								}
 							]

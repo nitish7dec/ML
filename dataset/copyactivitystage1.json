@@ -1,8 +1,8 @@
 {
-	"name": "combineddataset",
+	"name": "copyactivitystage1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Bloblinkedservice",
+			"referenceName": "metadatatocopyactivity",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
@@ -19,7 +19,8 @@
 					"value": "@dataset().FileName",
 					"type": "Expression"
 				},
-				"container": "practise"
+				"folderPath": "Data",
+				"container": "myfolder"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

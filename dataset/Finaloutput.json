@@ -1,8 +1,8 @@
 {
-	"name": "sinkdataset",
+	"name": "Finaloutput",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Bloblinkedservice",
+			"referenceName": "FinaltoBlob",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,7 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"container": "practise"
+				"folderPath": "Finaldata",
+				"container": "raw"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
