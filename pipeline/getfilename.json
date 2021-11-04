@@ -40,7 +40,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('get filename').output.childItems",
+						"value": "@activity('Copy data1').output",
 						"type": "Expression"
 					},
 					"isSequential": true,
