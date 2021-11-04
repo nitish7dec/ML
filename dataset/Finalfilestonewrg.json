@@ -10,7 +10,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "Final Files",
+				"folderPath": {
+					"value": "@toUpper('Final File')",
+					"type": "Expression"
+				},
 				"container": "raw"
 			},
 			"columnDelimiter": ",",
