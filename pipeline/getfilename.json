@@ -25,6 +25,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -110,7 +111,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "Final_file_meta_data",
+									"referenceName": "sinkdumpdataset",
 									"type": "DatasetReference"
 								}
 							]

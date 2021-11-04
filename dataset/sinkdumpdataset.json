@@ -1,0 +1,22 @@
+{
+	"name": "sinkdumpdataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedservice2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "nitishpractise"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
