@@ -1,0 +1,9 @@
+{
+	"name": "ADFNitish",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "31b64098-550c-435e-b388-fdac483fb243",
+		"tenantId": "bf23cd81-c8b6-48f4-ba51-09d659e27ae2"
+	}
+}
