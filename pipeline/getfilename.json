@@ -32,7 +32,7 @@
 				}
 			},
 			{
-				"name": "ForEach1",
+				"name": "forloop",
 				"type": "ForEach",
 				"dependsOn": [
 					{
@@ -51,7 +51,7 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "get latest date",
+							"name": "getlatestfilename",
 							"type": "GetMetadata",
 							"dependsOn": [],
 							"policy": {
@@ -64,18 +64,18 @@
 							"userProperties": [],
 							"typeProperties": {
 								"dataset": {
-									"referenceName": "getlatestfile",
+									"referenceName": "nitishbloblinkedservice",
 									"type": "DatasetReference",
 									"parameters": {
-										"Get Filename": {
+										"Filename": {
 											"value": "@item().name",
 											"type": "Expression"
 										}
 									}
 								},
 								"fieldList": [
-									"lastModified",
-									"itemName"
+									"itemName",
+									"lastModified"
 								],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
