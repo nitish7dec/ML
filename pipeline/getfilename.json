@@ -63,7 +63,13 @@
 							"typeProperties": {
 								"dataset": {
 									"referenceName": "getlatestfile",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"Get Filename": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
 								},
 								"fieldList": [
 									"lastModified",
