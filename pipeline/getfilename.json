@@ -100,7 +100,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@greater(formatDateTime(activity('getlatestfilename').output.lastmodified,'yyyyMMddHHmmss'),formatDateTime(variables('previousmodifieddate'),'yyyyMMddHHmmss'))",
+									"value": "@greater(formatDateTime(activity('getlatestfilename').output.lastModified,'yyyyMMddHHmmss'),formatDateTime(variables('previousmodifieddate'),'yyyyMMddHHmmss'))",
 									"type": "Expression"
 								},
 								"ifTrueActivities": [
@@ -142,6 +142,77 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "copy activity",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "forloop",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "getlatestfilestage2",
+						"type": "DatasetReference",
+						"parameters": {
+							"Filename": {
+								"value": "@variables('latestfilename')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "finaloutput",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"variables": {
