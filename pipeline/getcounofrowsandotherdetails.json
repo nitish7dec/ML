@@ -152,7 +152,7 @@
 									},
 									"RowCnt": {
 										"value": {
-											"value": "@activity('Copy data1').output.rowscounted",
+											"value": "@activity('Copy data1').output.rowsCopied",
 											"type": "Expression"
 										},
 										"type": "Int32"
